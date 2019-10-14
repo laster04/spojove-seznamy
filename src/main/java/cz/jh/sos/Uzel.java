@@ -2,19 +2,19 @@ package cz.jh.sos;
 
 public class Uzel {
 
-    private Integer hodnota;
+    private String hodnota;
     private Uzel predchozi;
     private Uzel nasledujici;
 
-    public Uzel(Integer hodnota) {
+    public Uzel(String hodnota) {
         this.hodnota = hodnota;
     }
 
-    public Integer getHodnota() {
+    public String getHodnota() {
         return hodnota;
     }
 
-    public void setHodnota(Integer hodnota) {
+    public void setHodnota(String hodnota) {
         this.hodnota = hodnota;
     }
 

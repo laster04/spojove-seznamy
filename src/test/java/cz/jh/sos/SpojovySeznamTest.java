@@ -1,58 +1,69 @@
 package cz.jh.sos;
 
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.JUnit4;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
-@RunWith(JUnit4.class)
-public class SpojovySeznamTest {
+class SpojovySeznamTest {
 
     private SpojovySeznam spojovySeznam;
 
-    @Before
-    public void before() {
+    @BeforeEach
+    void setUp() {
         spojovySeznam = new SpojovySeznam();
     }
 
     @Test
-    public void initSeznam150Test() {
-        testInitSeznam(150);
+    void initSeznam() {
+        spojovySeznam.initSeznam(4);
+        assertEquals(4, spojovySeznam.getSize());
+        Uzel u = spojovySeznam.getByIndex(2);
+        assertEquals("aaaa2", u.getHodnota());
     }
 
     @Test
-    public void initSeznam20Test() {
-        testInitSeznam(20);
+    void add() {
+        spojovySeznam.add("Martin");
+        assertEquals(1, spojovySeznam.getSize());
+        spojovySeznam.add("Lukas");
+        spojovySeznam.add("Franta");
+        assertEquals(3, spojovySeznam.getSize());
     }
 
     @Test
-    public void iniSeznam300Test() {
-        testInitSeznam(300);
+    void getByIndex() {
+        spojovySeznam.add("Jarda");
+        spojovySeznam.add("Bozik");
+        assertEquals(2, spojovySeznam.getSize());
+        Uzel u = spojovySeznam.getByIndex(2);
+        assertEquals("Bozik", u.getHodnota());
+    }
+
+    @Test()
+    void getByIndexException() {
+        spojovySeznam.add("Josef");
+        assertThrows(IndexOutOfBoundsException.class, () -> spojovySeznam.getByIndex(5));
     }
 
     @Test
-    public void initSeznamMinusTest() {
-        testInitSeznam(-50);
+    void removeLast() {
+        spojovySeznam.add("Jarda");
+        spojovySeznam.add("Bozik");
+        assertEquals(2, spojovySeznam.getSize());
+        Uzel u = spojovySeznam.getByIndex(2);
+        assertEquals("Bozik", u.getHodnota());
+        spojovySeznam.removeLast();
+        assertEquals(1, spojovySeznam.getSize());
+        assertThrows(IndexOutOfBoundsException.class, () -> spojovySeznam.getByIndex(2));
+        u = spojovySeznam.getByIndex(1);
+        assertEquals("Jarda", u.getHodnota());
     }
 
-    private void testInitSeznam(int delkaSeznamu) {
-        Uzel uzel = spojovySeznam.initSeznam(delkaSeznamu);
-        assertNotNull(uzel);
-        assertEquals(delkaSeznamu, coutNasledujici(uzel));
+    @Test
+    void getSize() {
+        spojovySeznam.add("Pavel");
+        spojovySeznam.add("Pepa");
+        assertNotEquals(4, spojovySeznam.getSize());
     }
-
-    private int coutNasledujici(Uzel uzel) {
-        int count = 1;
-
-        while(uzel.getNasledujici() != null) {
-            count++;
-            uzel = uzel.getNasledujici();
-        }
-        return count;
-    }
-
-
 }

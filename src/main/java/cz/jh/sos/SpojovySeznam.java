@@ -1,5 +1,7 @@
 package cz.jh.sos;
 
+import java.util.Random;
+
 public class SpojovySeznam {
 
     private Uzel prvni;
@@ -7,16 +9,24 @@ public class SpojovySeznam {
     private int size;
 
 
-    public Uzel initSeznam(int delkaSeznamu) {
-        Uzel prvniUzel = new Uzel(1);
-        Uzel predchoziUzel = prvniUzel;
-        for (int i = 2; i <= delkaSeznamu; i++) {
-            Uzel nasledujiciUzel = new Uzel(i);
-            predchoziUzel.setNasledujici(nasledujiciUzel);
-            nasledujiciUzel.setPredchozi(predchoziUzel);
-            predchoziUzel = nasledujiciUzel;
+    public void initSeznam(int delkaSeznamu) {
+        for (int i = 0; i < delkaSeznamu; i++) {
+            this.add("aaaa" + String.valueOf(i));
         }
+    }
 
-        return prvniUzel;
+    public void add(String value) {
+    }
+
+    public Uzel getByIndex(int index) {
+        return null;
+    }
+
+    public void removeLast() {
+
+    }
+
+    public int getSize() {
+        return 0;
     }
 }
