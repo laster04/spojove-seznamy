@@ -38,6 +38,9 @@ class SpojovySeznamTest {
         assertEquals(2, spojovySeznam.getSize());
         Uzel u = spojovySeznam.getByIndex(2);
         assertEquals("Bozik", u.getHodnota());
+        spojovySeznam.add("Hanz");
+        u = spojovySeznam.getByIndex(3);
+        assertNotNull(u);
     }
 
     @Test()
@@ -53,11 +56,25 @@ class SpojovySeznamTest {
         assertEquals(2, spojovySeznam.getSize());
         Uzel u = spojovySeznam.getByIndex(2);
         assertEquals("Bozik", u.getHodnota());
+        assertNull(u.getNasledujici());
         spojovySeznam.removeLast();
         assertEquals(1, spojovySeznam.getSize());
         assertThrows(IndexOutOfBoundsException.class, () -> spojovySeznam.getByIndex(2));
         u = spojovySeznam.getByIndex(1);
         assertEquals("Jarda", u.getHodnota());
+        assertNull(u.getNasledujici());
+    }
+
+    @Test
+    void addOnIndex() {
+        spojovySeznam.initSeznam(5);
+        assertEquals(5, spojovySeznam.getSize());
+        Uzel u = spojovySeznam.getByIndex(3);
+        assertEquals("aaaa3", u.getHodnota());
+        spojovySeznam.addOnIndex("Karel", 4);
+        assertEquals(6, spojovySeznam.getSize());
+        u = spojovySeznam.getByIndex(4);
+        assertEquals("Karel", u.getHodnota());
     }
 
     @Test
