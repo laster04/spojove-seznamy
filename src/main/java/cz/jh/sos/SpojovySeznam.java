@@ -54,4 +54,8 @@ public class SpojovySeznam {
 
     public void addOnIndex(String hodnota, int index) {
     }
+
+    public void removeByIndex(int index) {
+
+    }
 }
